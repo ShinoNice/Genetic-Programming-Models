@@ -15,7 +15,7 @@ This dataset has data on cow milk production from a farm in North Italy, which i
 The modelling problem to be solved in the project is to infer the lactose contents exclusively using data from the milking robots. The features dataset is provided in the data_project_nel.csv file. Lactose target values are provided in the y_lactose.csv file.
 
 ## Data
-The data used for this project is provided is the following:
+The data used for this project is provided is can be found in the datamart folder:
 - The features dataset is provided in the data_project_nel.csv file.
 - Lactose target values are provided in the y_lactose.csv file.
 - Additionally, you can also work with models for Fat (y_fat.csv) and Protein (y_protein.csv) contents.
