@@ -1,0 +1,349 @@
+#--- parameters for the lactose experiment ---#
+
+[NEAT]
+# The function used to compute the termination 
+# criterion from the set of genome fitnesses. 
+fitness_criterion     = max
+
+# When the fitness computed by fitness_criterion 
+# meets or exceeds this threshold, the evolution 
+# process will terminate, with a call to any 
+# registered reporting class 'found_solution' method.
+# Note
+# The found_solution method is not called if the maximum 
+# number of generations is reached without the above 
+# threshold being passed.
+fitness_threshold     = 0.
+
+# If no_fitness_termination evaluates to True, 
+# then the fitness_criterion and fitness_threshold are ignored 
+# for termination; only valid if termination by a maximum number 
+# of generations passed to population.Population.run() is enabled, 
+# and the found_solution method is called upon 
+# generation number termination.
+no_fitness_termination = False
+
+# The number of individuals in NEAT population.
+pop_size              = 250
+
+# If this evaluates to True, when all species simultaneously 
+# become extinct due to stagnation, a new random population will be created. 
+# If False, a CompleteExtinctionException will be thrown.
+reset_on_extinction   = False
+
+# The DefaultGenome section specifies parameters 
+# for the builtin DefaultGenome class. This section 
+# is only necessary if you specify this class as the genome 
+# implementation when creating the Config instance; 
+# otherwise you need to include whatever configuration 
+# (if any) is required for your particular implementation.
+[DefaultGenome]
+
+# node activation options
+
+# The default activation function attribute assigned to 
+# new nodes. If none is given, or “random” is specified, 
+# one of the activation_options will be chosen at random.
+activation_default      = identity
+
+# The probability that mutation will replace the node’s activation 
+# function with a randomly-determined member of the activation_options. 
+# Valid values are in [0.0, 1.0].
+activation_mutate_rate  = 0.5
+
+# A space-separated list of the activation functions that 
+# may be used by nodes. This defaults to sigmoid. 
+# The built-in available functions can be found in Overview 
+# of builtin activation functions; 
+# more can be added as described in Customizing Behavior.
+activation_options      = sigmoid identity gauss relu
+
+# node aggregation options
+
+# The default aggregation function attribute assigned to 
+# new nodes. If none is given, or “random” is specified, 
+# one of the aggregation_options will be chosen at random.
+aggregation_default     = sum
+
+# The probability that mutation will replace the node’s 
+# aggregation function with a randomly-determined member 
+# of the aggregation_options. Valid values are in [0.0, 1.0].
+aggregation_mutate_rate = 0.5
+
+# A space-separated list of the aggregation functions that 
+# may be used by nodes. This defaults to “sum”. The available 
+# functions (defined in aggregations) are: sum, product, min, 
+# max, mean, median, and maxabs (which returns the input value 
+# with the greatest absolute value; the returned value may 
+# be positive or negative). New aggregation functions can be 
+# defined similarly to new activation functions. 
+aggregation_options     = mean sum
+
+# node bias options
+
+# The mean and standard deviation of the normal/gaussian 
+# distribution, if it is used to select bias attribute 
+# values for new nodes.
+bias_init_mean          = 0.0
+bias_init_stdev         = 1.0
+
+# bias_init_type
+# If set to gaussian or normal, then the initialization is 
+# to a normal/gaussian distribution. If set to uniform, 
+# a uniform distribution from 
+# max(𝑏𝑖𝑎𝑠_𝑚𝑖𝑛_𝑣𝑎𝑙𝑢𝑒,(𝑏𝑖𝑎𝑠_𝑖𝑛𝑖𝑡_𝑚𝑒𝑎𝑛−(𝑏𝑖𝑎𝑠_𝑖𝑛𝑖𝑡_𝑠𝑡𝑑𝑒𝑣∗2))) to 
+# min(𝑏𝑖𝑎𝑠_𝑚𝑎𝑥_𝑣𝑎𝑙𝑢𝑒,(𝑏𝑖𝑎𝑠_𝑖𝑛𝑖𝑡_𝑚𝑒𝑎𝑛+(𝑏𝑖𝑎𝑠_𝑖𝑛𝑖𝑡_𝑠𝑡𝑑𝑒𝑣∗2))). 
+# Note that the standard deviation of a uniform distribution 
+# is not range/0.25, as implied by this, but the range divided 
+# by a bit over 0.288 (the square root of 12); however, this 
+# approximation makes setting the range much easier.) 
+# This defaults to “gaussian”.
+
+# The maximum and minimum allowed bias value. Biases above 
+# this value will be clamped to this value.
+bias_max_value          = 30.0
+bias_min_value          = -30.0
+
+# The standard deviation of the zero-centered normal/gaussian 
+# distribution from which a bias value mutation is drawn.
+bias_mutate_power       = 0.5
+
+# The probability that mutation will change the bias of a 
+# node by adding a random value.
+bias_mutate_rate        = 0.7
+
+# The probability that mutation will replace the bias of a 
+# node with a newly chosen random value (as if it were a new node).
+bias_replace_rate       = 0.1
+
+# genome compatibility options
+
+# The coefficient for the disjoint and excess gene 
+# counts’ contribution to the genomic distance.
+compatibility_disjoint_coefficient = 1.0
+
+# The coefficient for each weight, bias, or response 
+# multiplier difference’s contribution to the genomic 
+# distance (for homologous nodes or connections). 
+# This is also used as the value to add for differences 
+# in activation functions, aggregation functions, or 
+# enabled/disabled status.
+compatibility_weight_coefficient   = 0.5
+
+# connection add/remove rates
+
+# The probability that mutation will add or delete 
+# a connection between existing nodes. 
+# Valid values are in [0.0, 1.0].
+conn_add_prob           = 0.5
+conn_delete_prob        = 0.5
+
+# connection enable options
+
+# The default enabled attribute of newly created 
+# connections. Valid values are True and False.
+# Note: “Newly created connections” include ones in 
+# newly-created genomes, if those have initial connections 
+# (from the setting of the initial_connection variable).
+enabled_default         = True
+
+# The probability that mutation will replace (50/50
+# chance of True or False) the enabled status of 
+# a connection. Valid values are in [0.0, 1.0].
+enabled_mutate_rate     = 0.01
+
+# If this evaluates to True, generated networks will not 
+# be allowed to have recurrent connections 
+# (they will be feedforward). Otherwise they may be 
+# (but are not forced to be) recurrent.
+feed_forward            = True
+
+# Specifies the initial connectivity of newly-created 
+# genomes. (Note the effects on settings other than 
+# unconnected of the enabled_default parameter.) 
+# There are seven allowed values:
+#   unconnected - No connections are initially present. 
+#   This is the default.
+#   fs_neat_nohidden - One randomly-chosen input node has 
+#   one connection to each output node. (This is one version 
+#   of the FS-NEAT scheme; “FS” stands for “Feature Selection”.)
+#   fs_neat_hidden - One randomly-chosen input node has one 
+#   connection to each hidden and output node. (This is 
+#   another version of the FS-NEAT scheme. 
+#   If there are no hidden nodes, it is the same as fs_neat_nohidden.)
+#   full_nodirect - Each input node is connected to all hidden 
+#   nodes, if there are any, and each hidden node is connected 
+#   to all output nodes; otherwise, each input node is connected 
+#   to all output nodes. Genomes with feed_forward set to F
+#   alse will also have recurrent (loopback, in this case) 
+#   connections from each hidden or output node to itself.
+#   full_direct - Each input node is connected to all hidden 
+#   and output nodes, and each hidden node is connected to all 
+#   output nodes. Genomes with feed_forward set to False will 
+#   also have recurrent (loopback, in this case) connections from 
+#   each hidden or output node to itself.
+initial_connection      = full_nodirect
+
+# node add/remove rates
+
+# The probability that mutation will add a new node 
+# (essentially replacing an existing connection, the enabled 
+# status of which will be set to False). 
+# Valid values are in [0.0, 1.0].
+node_add_prob           = 0.5
+node_delete_prob        = 0.5
+
+# network parameters
+
+# The number of hidden nodes to add to each 
+# genome in the initial population. Note that
+# These are the nodes other than input nodes and 
+# output nodes. In the original NEAT (NeuroEvolution of 
+# Augmenting Topologies) algorithm, networks start 
+# with no hidden nodes, and evolve more 
+# complexity as necessary - thus “Augmenting Topologies”.
+num_hidden              = 5
+
+# The number of input nodes, through which the 
+# network receives inputs.
+num_inputs              = 12
+
+# The number of output nodes, to which the network 
+# delivers outputs.
+num_outputs             = 1
+
+# node response options
+
+# The mean and standard deviation of the normal/gaussian 
+# distribution, if it is used to select response multiplier 
+# attribute values for new nodes.
+response_init_mean      = 1.0
+response_init_stdev     = 0.0
+# response_init_type: If set to gaussian or normal, then the 
+# initialization is to a normal/gaussian distribution. 
+
+# The maximum/minimum allowed response multiplier. 
+# Response multipliers above this value will be clamped to this value.
+response_max_value      = 30.0
+response_min_value      = -30.0
+
+# The standard deviation of the zero-centered normal/gaussian 
+# distribution from which a response multiplier mutation is drawn.
+response_mutate_power   = 0.0
+
+# The probability that mutation will change the response 
+# multiplier of a node by adding a random value.
+response_mutate_rate    = 0.0
+
+# The probability that mutation will replace the response 
+# multiplier of a node with a newly chosen random value 
+# (as if it were a new node).
+response_replace_rate   = 0.0
+
+# single_structural_mutation: If this evaluates to True, only 
+# one structural mutation (the addition or removal of a node 
+# or connection) will be allowed per genome per generation.
+# New in version 0.92.
+
+# structural_mutation_surer: If this evaluates to True, 
+# then an attempt to add a node to a genome lacking connections 
+# will result in adding a connection instead; furthermore, 
+# if an attempt to add a connection tries to add a connection 
+# that already exists, that connection will be enabled. 
+# If this is set to default, then it acts as if it had the 
+# same value as single_structural_mutation (above). 
+# This defaults to “default”. New in version 0.92.
+
+# connection weight options
+
+# The mean and standard deviation of the normal/gaussian 
+# distribution used to select weight attribute values 
+# for new connections.
+weight_init_mean        = 0.0
+weight_init_stdev       = 1.0
+
+# weight_init_type: If set to gaussian or normal, 
+# then the initialization is to a normal/gaussian distribution.
+# New in version 0.92.
+
+# The maximum/minimum allowed weight value. Weights 
+# above/below this value will be clamped to this value.
+weight_max_value        = 30
+weight_min_value        = -30
+
+# The standard deviation of the zero-centered normal/gaussian 
+# distribution from which a weight value mutation is drawn.
+weight_mutate_power     = 0.5
+
+# The probability that mutation will change the weight 
+# of a connection by adding a random value.
+weight_mutate_rate      = 0.7
+
+# The probability that mutation will replace the weight of a 
+# connection with a newly chosen random value (as if it were a new connection).
+weight_replace_rate     = 0.1
+
+# The DefaultSpeciesSet section specifies parameters 
+# for the builtin DefaultSpeciesSet class. This section 
+# is only necessary if you specify this class as the genome 
+# implementation when creating the Config instance; 
+# otherwise you need to include whatever configuration 
+# (if any) is required for your particular implementation.
+[DefaultSpeciesSet]
+
+# Individuals whose genomic distance is less than 
+# this threshold are considered to be in the same species.
+compatibility_threshold = 5.
+
+# The DefaultStagnation section specifies parameters 
+# for the builtin DefaultStagnation class. This section 
+# is only necessary if you specify this class as the 
+# stagnation implementation when creating the Config instance; 
+# otherwise you need to include whatever configuration 
+# (if any) is required for your particular implementation.
+[DefaultStagnation]
+
+# The function used to compute species fitness.
+# This defaults to ``mean``. 
+# Allowed values are: max, min, mean, and median
+# Note: This is not used for calculating species 
+# fitness for apportioning reproduction (which always uses mean).
+species_fitness_func = max
+
+# Species that have not shown improvement in more than 
+# this number of generations will be considered stagnant 
+# and removed. This defaults to 15.
+max_stagnation       = 20
+
+# The number of species that will be protected from stagnation; 
+# mainly intended to prevent total extinctions caused by 
+# all species becoming stagnant before new species arise. 
+# For example, a species_elitism setting of 3 will prevent 
+# the 3 species with the highest species fitness from 
+# being removed for stagnation regardless of the amount 
+# of time they have not shown improvement. This defaults to 0.
+species_elitism      = 2
+
+# The DefaultReproduction section specifies parameters for the 
+# builtin DefaultReproduction class.
+# This section is only necessary if you specify this class 
+# as the reproduction implementation when creating the Config instance; 
+# otherwise you need to include whatever configuration 
+# (if any) is required for your particular implementation.
+[DefaultReproduction]
+
+# The number of most-fit individuals in each species that will 
+# be preserved as-is from one generation to the next. This defaults to 0.
+elitism            = 2
+
+# The fraction for each species allowed to reproduce 
+# each generation. This defaults to 0.2.
+survival_threshold = 0.2
+
+# The minimum number of genomes per species after 
+# reproduction. This defaults to 2.
+# min_species_size
+
+
+
+
