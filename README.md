@@ -1,4 +1,4 @@
-# Airbnb Property Unlisting Prediction
+# Inference of Lactose Contents Using Genetic Programming
 
 Welcome to the Neural and Evolutionary Learning project! This project was developed as part of the NEL course for the 2023/2024 academic year. Our objective is to use Genetic Programming models to compare and discuss the behaviour, performance, and application of different GPs.
 
